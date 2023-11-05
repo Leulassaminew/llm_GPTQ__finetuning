@@ -159,7 +159,7 @@ def train(
     wandb_watch: str = "",  # options: false | gradients | all
     wandb_log_model: str = "",  # options: false | true
     resume_from_checkpoint: str = None,  # either training checkpoint or final adapter
-    prompt_template: str = "vicuna",  # The prompt template to use, will default to alpaca.
+    prompt_template: str = "alpaca",  # The prompt template to use, will default to alpaca.
     # memory optimization params
     mode: Union[int, str] = 8,  # training floating point mode
     gradient_checkpointing: bool = False,
@@ -324,7 +324,7 @@ def train(
         if not train_on_inputs:
             assert isinstance(prompter, AlpacaPrompter)
             user_prompt = prompter.generate_prompt(
-                data_point["instruction"], data_point["input"]
+                 data_point["text"]
             )
             tokenized_user_prompt = tokenize(user_prompt, add_eos_token=add_eos_token)
             user_prompt_len = len(tokenized_user_prompt["input_ids"])
