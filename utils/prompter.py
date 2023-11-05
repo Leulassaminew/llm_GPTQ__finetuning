@@ -48,13 +48,14 @@ class AlpacaPrompter(object):
     def generate_prompt(
         self,
         text: str,
-        category: str,
+        category: Union[None,str] = None,
         **kwargs,  # ignore these additional keywords
     ) -> str:
         # returns the full prompt from instruction and optional input
         # if a label (=response, =output) is provided, it's also appended.
         res = self.template["prompt_input"].format(input=text)
-        res = f"{res}{category}"
+        if category:
+            res = f"{res}{category}"
         if self._verbose:
             print(res)
         return res
