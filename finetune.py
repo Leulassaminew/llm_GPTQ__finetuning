@@ -367,7 +367,7 @@ def train(
                     },
                 )
             else:
-                data = load_dataset(data_path)
+                data = load_dataset(data_path,token="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")
 
         if val_set_size > 0:
             train_val = data["train"].train_test_split(
